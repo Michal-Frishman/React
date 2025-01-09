@@ -1,0 +1,1 @@
+export type UserType = { firstName: string,lastName: string, password: string ,email:string, address: string,phone:string}
