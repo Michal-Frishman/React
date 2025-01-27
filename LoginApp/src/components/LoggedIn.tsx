@@ -1,13 +1,12 @@
 import { Avatar, Button, Stack } from "@mui/material";
 import { createContext, Dispatch, useContext, useState } from "react";
 import UpdateUser from "./UpdateUser";
-import { userContext } from "./HomePage";
+import HomePage, { userContext } from "./HomePage";
 
 export const closeUpdate = createContext<[boolean, Dispatch<boolean>]>([false, () => { }])
 
 const LoggedIn = () => {
     function stringToColor(string: string) {
-        console.log(string);
 
         let hash = 0;
         let i;
@@ -34,6 +33,7 @@ const LoggedIn = () => {
         };
     }
 
+    const [logOut, setLogOut] = useState(false);
     const [update, setUpdate] = useState(false);
     const [user, dispatch] = useContext(userContext);
 
@@ -53,7 +53,16 @@ const LoggedIn = () => {
                         color="primary" variant="outlined" onClick={() => setUpdate(!update)}>
                         Update
                     </Button>
+                    <Button sx={{
+                        height: 30,
+                        width: 80,
+                        fontSize: 12
+                    }}
+                        color="primary" variant="outlined" onClick={() => setLogOut(true)}>
+                        Log Out
+                    </Button>
                 </Stack>
+
                 <closeUpdate.Provider value={[update, setUpdate]}>
                     {update &&
                         <UpdateUser />

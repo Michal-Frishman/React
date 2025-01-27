@@ -1,14 +1,11 @@
+import { RouterProvider } from 'react-router'
 import './App.css'
-import HomePage from './components/HomePage'
-
-
+import { router } from './components/router'
 
 function App() {
-
-
   return (
     <>
-      <HomePage />
+      <RouterProvider router={router} />
     </>
   )
 }
