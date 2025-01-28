@@ -1,7 +1,7 @@
 import { Avatar, Button, Stack } from "@mui/material";
 import { createContext, Dispatch, useContext, useState } from "react";
 import UpdateUser from "./UpdateUser";
-import HomePage, { userContext } from "./HomePage";
+import HomePage, { idUser, userContext } from "./HomePage";
 
 export const closeUpdate = createContext<[boolean, Dispatch<boolean>]>([false, () => { }])
 
@@ -32,10 +32,13 @@ const LoggedIn = () => {
             children: `${name[0]}`
         };
     }
-
+  
     const [logOut, setLogOut] = useState(false);
     const [update, setUpdate] = useState(false);
     const [user, dispatch] = useContext(userContext);
+    const userID = useContext<number>(idUser);
+    console.log("user.firstName"+user.firstName);
+    
 
     return (
         <>
@@ -43,7 +46,7 @@ const LoggedIn = () => {
                 <Stack direction="column" spacing={2}>
                     <Stack direction="row" spacing={4}>
                         <Avatar {...stringAvatar(user.firstName)} />
-                        <h4>{user.firstName}</h4>
+                        <h1>{user.firstName}</h1>
                     </Stack>
                     <Button sx={{
                         height: 30,
@@ -51,18 +54,10 @@ const LoggedIn = () => {
                         fontSize: 12
                     }}
                         color="primary" variant="outlined" onClick={() => setUpdate(!update)}>
-                        Update
-                    </Button>
-                    <Button sx={{
-                        height: 30,
-                        width: 80,
-                        fontSize: 12
-                    }}
-                        color="primary" variant="outlined" onClick={() => setLogOut(true)}>
-                        Log Out
+                        Update Details
                     </Button>
                 </Stack>
-
+              
                 <closeUpdate.Provider value={[update, setUpdate]}>
                     {update &&
                         <UpdateUser />

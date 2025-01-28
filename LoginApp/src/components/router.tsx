@@ -1,18 +1,24 @@
-import { createBrowserRouter, Outlet } from 'react-router'
-import HomePage from './HomePage'
-import NavBar from './NavBar'
+import { createBrowserRouter } from 'react-router'
 import About from './About'
+import HomePage from './user/HomePage'
+import AppLayout from './AppLayout'
+import RecipesList from './recipes/RecipesList'
+import { Provider } from 'react-redux'
+import store from '../Store'
 export const router = createBrowserRouter([
     {
         path: '/',
         element: (
             <>
-                <NavBar /> <Outlet />
+                <AppLayout />
             </>
         ),
         children: [
-            { path: '', element: <HomePage /> },
-            { path: 'about', element: <About /> }
+            {
+                path: 'recipes', element: <Provider store={store}>
+                    <RecipesList />
+                </Provider>   
+            }
         ]
     }
 ])

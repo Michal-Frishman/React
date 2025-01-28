@@ -1,11 +1,9 @@
 import { Link } from "react-router"
 
 const NavBar = () => {
-
     return (<>
         <nav>
-            <Link to='/'>Home</Link> | 
-            <Link to='/about'>About</Link> | 
+            <Link to='/recipes'>Recipes</Link> | 
         </nav>
     </>)
 }

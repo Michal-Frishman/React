@@ -34,8 +34,10 @@ const UpdateUser = () => {
 
     const submit = async (e: FormEvent) => {
         e.preventDefault();
+        console.log("user details"+firstNameRef.current?.value, lastNameRef.current?.value, emailRef.current?.value, phoneRef.current?.value, passwordRef.current?.value);
+        console.log("user id"+userID);
+        
         try {
- 
          await axios.put(
                 url,
                 {
