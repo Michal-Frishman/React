@@ -1,8 +1,7 @@
 import { Avatar, Button, Stack } from "@mui/material";
 import { createContext, Dispatch, useContext, useState } from "react";
 import UpdateUser from "./UpdateUser";
-import HomePage, { idUser, userContext } from "./HomePage";
-
+import { userContext } from "../../App";
 export const closeUpdate = createContext<[boolean, Dispatch<boolean>]>([false, () => { }])
 
 const LoggedIn = () => {
@@ -23,30 +22,37 @@ const LoggedIn = () => {
         }
         return color;
     }
-
     const stringAvatar = (name: string) => {
-        return {
-            sx: {
-                bgcolor: stringToColor(name),
-            },
-            children: `${name[0]}`
+
+        if (name == "" || name == undefined) {
+            return {
+                sx: {
+                    bgcolor: 'black',
+                },
+                children: `?`
+            };
+        }
+        else {
+            return {
+                sx: {
+                    bgcolor: stringToColor(name),
+                },
+                children: `${name.split(' ')[0][0]}`
+            }
         };
     }
-  
-    const [logOut, setLogOut] = useState(false);
+
     const [update, setUpdate] = useState(false);
     const [user, dispatch] = useContext(userContext);
-    const userID = useContext<number>(idUser);
-    console.log("user.firstName"+user.firstName);
-    
-
     return (
         <>
             <>
                 <Stack direction="column" spacing={2}>
                     <Stack direction="row" spacing={4}>
-                        <Avatar {...stringAvatar(user.firstName)} />
-                        <h1>{user.firstName}</h1>
+                        <Avatar {...stringAvatar(user.firstName)} >
+                            {(user.firstName ? user.firstName[0] : '')}
+                        </Avatar>
+                        <h4> Hello {user.firstName}</h4>
                     </Stack>
                     <Button sx={{
                         height: 30,
@@ -54,10 +60,9 @@ const LoggedIn = () => {
                         fontSize: 12
                     }}
                         color="primary" variant="outlined" onClick={() => setUpdate(!update)}>
-                        Update Details
+                        Update 
                     </Button>
                 </Stack>
-              
                 <closeUpdate.Provider value={[update, setUpdate]}>
                     {update &&
                         <UpdateUser />

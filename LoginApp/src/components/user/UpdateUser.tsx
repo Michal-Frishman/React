@@ -1,8 +1,8 @@
 import { FormEvent, useContext, useRef, useState } from "react"
-import { closeUpdate } from "./LoggedIn";
-import { idUser, userContext } from "./HomePage";
+import { closeUpdate } from "./LogedIn";
 import { Button, Box, Modal, TextField } from '@mui/material';
 import axios, { AxiosError } from "axios"
+import { userContext } from "../../App";
 
 const style = {
     position: 'absolute',
@@ -18,7 +18,6 @@ const style = {
 
 const UpdateUser = () => {
     const [open, setOpen] = useState(true);
-    const userID = useContext<number>(idUser);
 
     const [close, setClose] = useContext(closeUpdate);
     const [user, dispatch] = useContext(userContext);
@@ -34,9 +33,8 @@ const UpdateUser = () => {
 
     const submit = async (e: FormEvent) => {
         e.preventDefault();
-        console.log("user details"+firstNameRef.current?.value, lastNameRef.current?.value, emailRef.current?.value, phoneRef.current?.value, passwordRef.current?.value);
-        console.log("user id"+userID);
-        
+        console.log(user.id);      
+        console.log("user details "+firstNameRef.current?.value, lastNameRef.current?.value, emailRef.current?.value, phoneRef.current?.value, passwordRef.current?.value);
         try {
          await axios.put(
                 url,
@@ -48,7 +46,7 @@ const UpdateUser = () => {
                     phone: phoneRef.current?.value,
                     password : passwordRef.current?.value
                 },
-                { headers: { 'user-id': userID + '' } }
+                { headers: { 'user-id': user.id+ '' } }
             )
             dispatch({
                 type: 'UPDATE',
