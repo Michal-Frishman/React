@@ -2,15 +2,13 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 import { RootStore } from './RecipesStore';
-import { useContext } from 'react';
-import { userContext } from '../../App';
 export type RecipeType = {
     id?: number,
     title: string,
     description: string,
     ingredients: string[],
     instructions: string,
-    products: string,
+    // products: string,
     authorId?: number
 }
 export const fetchRecipes = createAsyncThunk('recipes/fetch', async (_, thunkApi) => {
@@ -21,17 +19,14 @@ export const fetchRecipes = createAsyncThunk('recipes/fetch', async (_, thunkApi
         return thunkApi.rejectWithValue(erorr);
     }
 })
-export const fetchAddRecipe = createAsyncThunk('recipes/add', async (recipe: RecipeType, thunkApi) => {
-    const [user, dispatch] = useContext(userContext);
-    console.log("in the fetch add recipe"); 
+export const fetchAddRecipe = createAsyncThunk('recipes/add', async ({recipe,userId}: { recipe: RecipeType; userId: number }, thunkApi) => {
     try {
-        const res = await axios.post("http://localhost:3000/api/recipes", recipe, { headers: { 'user-id': user.id + '' } });
+        const res = await axios.post("http://localhost:3000/api/recipes", recipe, { headers: { 'user-id': userId  } });
         return res.data as RecipeType;
     } catch (error) {
         return thunkApi.rejectWithValue(error);
     }
 });
-
 const recipesSlice = createSlice({
     name: 'recipes',
     initialState: {

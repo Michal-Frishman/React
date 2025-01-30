@@ -5,12 +5,14 @@ import { Provider } from 'react-redux'
 import store from './components/recipes/RecipesStore'
 import { createContext, Dispatch, useReducer } from 'react'
 import { UserType } from './components/UserType'
+import { ThemeProvider } from '@mui/material'
+import { theme } from './components/Theme'
 type partUser = Partial<UserType>;
 type action = {
   type: 'DELETE' | 'CREATE' | 'UPDATE',
   data: partUser
 }
-//check this!!!!!!!!
+//check this!!!!!!!! ????אותו דבר עדכון/הוספה 
 const userReducer = (state: UserType, action: action): UserType => {
   switch (action.type) {
     case 'CREATE':
@@ -27,11 +29,13 @@ function App() {
   const [user, dispatch] = useReducer(userReducer, {} as UserType);
   return (
     <>
-      <userContext.Provider value={[user, dispatch]}>
-        <Provider store={store}>
-          <RouterProvider router={router} />
-        </Provider>
-      </userContext.Provider>
+      <ThemeProvider theme={theme}>
+        <userContext.Provider value={[user, dispatch]}>
+          <Provider store={store}>
+            <RouterProvider router={router} />
+          </Provider>
+        </userContext.Provider>
+      </ThemeProvider>
     </>
   )
 }

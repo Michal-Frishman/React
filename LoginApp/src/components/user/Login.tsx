@@ -27,6 +27,7 @@ const HomePage = () => {
     const submit = async (e: FormEvent) => {
         e.preventDefault();
         try {
+            
             const res = await axios.post(
                 finalUrl,
                 {
@@ -47,6 +48,7 @@ const HomePage = () => {
                 data: { id, firstName, lastName, password, email, address, phone}
             });
             setShowModal(false);
+            //any!!!!!!!!
         } catch (e: any) {
             console.log("the error" + e);
             if (e.response?.status === 422)
@@ -65,8 +67,8 @@ const HomePage = () => {
         <>
             {!login ?
                 <div>
-                    <Button color="primary" variant="contained" onClick={() => { setShowModal(true); setFinalUrl(url + '/login') }}>Sign in</Button>
-                    <Button color="primary" variant="contained" onClick={() => { setShowModal(true); setFinalUrl(url + '/register') }}>Sign up</Button>
+                    <Button color="secondary" variant="contained" onClick={() => { setShowModal(true); setFinalUrl(url + '/login') }}>Sign in</Button>
+                    <Button color="secondary" variant="contained" onClick={() => { setShowModal(true); setFinalUrl(url + '/register') }}>Sign up</Button>
                 </div> :
                 <LoggedIn />}
             <Modal open={showModal} onClose={() => setShowModal(false)}>

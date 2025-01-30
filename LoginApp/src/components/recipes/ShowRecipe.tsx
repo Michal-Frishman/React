@@ -10,19 +10,20 @@ const ShowRecipe = () => {
     if (id) {
         recipe = recipesList.find(r => r.id === parseInt(id));
     } else {
-        recipe = recipesList.find(r => r.id === 0);
+        //הדפסת error
     }
     return (
         <>
-            <h1>{recipe?.title}: {recipe?.authorId}</h1>
+            <h1>{recipe?.title}</h1>
             <ul>
+                <h2>Ingredientes</h2>
                 {recipe?.ingredients.map((ingredient, index) => (
-                    <li key={index}>{ingredient}</li> 
+                    <li key={index}>{ingredient}</li>
                 ))}
             </ul>
+            <h2>Instructions</h2>
             <p>{recipe?.instructions}</p>
         </>
     );
 }
-
 export default ShowRecipe;
