@@ -6,7 +6,6 @@ import store from './components/recipes/RecipesStore'
 import { createContext, Dispatch, useReducer } from 'react'
 import { UserType } from './components/UserType'
 import { ThemeProvider } from '@mui/material'
-import { theme } from './components/Theme'
 type partUser = Partial<UserType>;
 type action = {
   type: 'DELETE' | 'CREATE' | 'UPDATE',
@@ -29,13 +28,11 @@ function App() {
   const [user, dispatch] = useReducer(userReducer, {} as UserType);
   return (
     <>
-      <ThemeProvider theme={theme}>
         <userContext.Provider value={[user, dispatch]}>
           <Provider store={store}>
             <RouterProvider router={router} />
           </Provider>
         </userContext.Provider>
-      </ThemeProvider>
     </>
   )
 }

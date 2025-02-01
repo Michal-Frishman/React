@@ -17,14 +17,15 @@ export const router = createBrowserRouter([
                     {
                         path: ':id',
                         element: <ShowRecipe />
-                    },   { path:'addRecipe',
-                        element:<AddRecipe />
                     }
                 ]
             },
-            { path: "home", element: <HomePage/> },
-            { index:true, element: <HomePage/> },
-     
+            { path: "home", element: <HomePage /> },
+            { index: true, element: <HomePage /> },
+            {
+                path: 'addRecipe',
+                element: <AddRecipe />
+            }
         ]
     }
 

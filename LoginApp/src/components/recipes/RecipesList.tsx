@@ -17,7 +17,7 @@ export default () => {
     }, [dispatch]);
     return (
         <>
-            <Grid container spacing={3}  >
+            <Grid container spacing={3} >
                 <Grid
                     item
                     xs={3}
@@ -29,12 +29,14 @@ export default () => {
                         overflowY: 'auto',
                         paddingRight: '20px',
                         zIndex: 1,
-                        borderLeft: '1px solid #ddd'
+                        borderLeft: '1px solid #ddd',
+                        paddingTop: 0
                     }}
+
                 >
-                    <Box sx={{ backgroundColor: "rgb(143, 157, 168)", p: 2, borderRadius: 1 }}>
+                    <Box sx={{ backgroundColor: "rgb(143, 157, 168)", p: 2, borderRadius: 1,position:"sticky",top:0,zIndex:222 }}>
                         <Typography variant="h4" color="white">
-                            List of recipes                    </Typography>
+                    Recipes                    </Typography>
                     </Box>
                     {recipesList.map((r: RecipeType, index: number) => (
                         <ListItem key={r.id ?? index} sx={{ marginBottom: "15px" }}>
@@ -46,12 +48,8 @@ export default () => {
                             }}>📃 {r.title}</Link>
                         </ListItem>
                     ))}
-
-
-                    {/* {user.id && <button onClick={() => setAddRecipes(true)}>➕ Add recipe</button>} */}
-                    {/* {addRecipes && <AddRecipe setAddRecipes={setAddRecipes} />} */}
                     {user.id && <Box sx={{ position: "sticky", bottom: 10, backgroundColor: "rgb(143, 157, 168)", padding: "10px", textAlign: "center" }}>
-                        <Link to="/recipes/addRecipe" style={{ color: "black" }} > Add a recipe</Link>
+                        <Link to="/addRecipe" style={{ color: "black" }} > Add a recipe</Link>
                     </Box>}
                 </Grid>
                 <Grid

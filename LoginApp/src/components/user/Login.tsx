@@ -62,12 +62,13 @@ const HomePage = () => {
             passwordRef.current!.value = ''
         }
     }
+    const color='rgb(143, 157, 168)'
     return (
         <>
             {!login ?
                 <div>
-                    <Button color="secondary" variant="contained" onClick={() => { setShowModal(true); setFinalUrl(url + '/login') }}>Sign in</Button>
-                    <Button color="secondary" variant="contained" onClick={() => { setShowModal(true); setFinalUrl(url + '/register') }}>Sign up</Button>
+                    <Button sx={{backgroundColor:color,marginRight:1}} variant="contained" onClick={() => { setShowModal(true); setFinalUrl(url + '/login') }}>Sign in</Button>
+                    <Button sx={{backgroundColor:color,marginRight:1}}  variant="contained" onClick={() => { setShowModal(true); setFinalUrl(url + '/register') }}>Sign up</Button>
                 </div> :
                 <LoggedIn />}
             <Modal open={showModal} onClose={() => setShowModal(false)}>
