@@ -51,12 +51,11 @@ const HomePage = () => {
             //any!!!!!!!!
         } catch (e: any) {
             console.log("the error" + e);
-            if (e.response?.status === 422)
+            if (e.response?.status === 400)
                 alert('user is already login')
             if (e.response?.status === 401)
                 alert('user is not logged in, sign up');
             setShowModal(false);
-
         }
         finally {
             emailRef.current!.value = ''

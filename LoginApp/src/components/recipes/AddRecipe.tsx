@@ -3,18 +3,20 @@ import { useForm } from "react-hook-form"
 import { object, string } from "yup"
 import { useDispatch } from "react-redux"
 import { AppDispatch } from "./RecipesStore"
-import { fetchAddRecipe, RecipeType } from "./RecipesSlice"
+import { fetchAddRecipe, fetchRecipes, RecipeType } from "./RecipesSlice"
 import { Box, Modal, TextField } from "@mui/material"
 import { style } from "../user/Login"
 import { useContext, useState } from "react"
 import { userContext } from "../../App"
+import { useNavigate } from "react-router"
 const schema = object({
     title: string().required(),
     description: string().required(),
     ingredients: string().required(),
     instructions: string().required(),
 }).required()
-const AddRecipe = ({ setAddRecipes }: { setAddRecipes: React.Dispatch<React.SetStateAction<boolean>> }) => {
+const AddRecipe = () => {
+    const navigate = useNavigate();
     const [openModal, setOpenModal] = useState(true);
     const [user, dispatch] = useContext(userContext);
     const {
@@ -23,23 +25,21 @@ const AddRecipe = ({ setAddRecipes }: { setAddRecipes: React.Dispatch<React.SetS
         handleSubmit,
         reset
     } = useForm({ resolver: yupResolver(schema) })
-    console.log(errors);
     const dispatchFetch = useDispatch<AppDispatch>();
     //any!!!
     const onSubmit = async (data: any) => {
-        console.log("try to submit", data);
         const ingredientsArray = data.ingredients.split(',');
         const recipe: RecipeType = {
             title: data.title,
             description: data.description,
             ingredients: ingredientsArray,
             instructions: data.instructions
-            // products: '',
         };
         setOpenModal(false);
-        setAddRecipes(false);
         dispatchFetch(fetchAddRecipe({ recipe, userId: user.id }));
+        dispatchFetch(fetchRecipes());
         reset();
+        navigate('/recipes');
     }
     return (<>
         <Modal open={openModal}>
@@ -71,8 +71,3 @@ const AddRecipe = ({ setAddRecipes }: { setAddRecipes: React.Dispatch<React.SetS
     </>)
 }
 export default AddRecipe
-
-
-
-
-

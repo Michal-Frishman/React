@@ -40,11 +40,14 @@
 .read-the-docs {
   color: #888;
 }
-body {
+/* body {
   background-image: url('welcome.jpg');
   background-size: cover; 
   background-position: center; 
   background-repeat: no-repeat; 
   height: 100%;
   margin: 0;
-}
+} */
+
+
+

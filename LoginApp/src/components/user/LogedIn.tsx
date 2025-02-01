@@ -23,11 +23,10 @@ const LoggedIn = () => {
         return color;
     }
     const stringAvatar = (name: string) => {
-
         if (name == "" || name == undefined) {
             return {
                 sx: {
-                    bgcolor: 'black',
+                    bgcolor: 'rgb(143, 157, 168)',
                 },
                 children: `?`
             };
@@ -35,13 +34,12 @@ const LoggedIn = () => {
         else {
             return {
                 sx: {
-                    bgcolor: stringToColor(name),
+                    bgcolor: "rgb(143, 157, 168)",
                 },
                 children: `${name.split(' ')[0][0]}`
             }
         };
     }
-
     const [update, setUpdate] = useState(false);
     const [user, dispatch] = useContext(userContext);
     return (

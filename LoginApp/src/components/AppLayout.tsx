@@ -23,7 +23,7 @@ const AppLayout = () => {
     return (
         <>
             <Toolbar sx={{
-                position: "absolute",
+                position: "fixed",
                 top: "25px",
                 left: "10px",
                 display: "flex",

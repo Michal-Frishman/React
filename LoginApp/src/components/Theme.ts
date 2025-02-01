@@ -3,10 +3,10 @@ import { createTheme } from "@mui/material";
 export const theme = createTheme({
     palette: {
       primary: {
-        main: '#00BFFF', // תכלת
+        main: "rgb(143, 157, 168)", 
     },
       secondary: {
-        main: "#FFB6C1", // ורוד פסטלי
+        main: "rgb(143, 157, 168)", 
     },
     },
   });
