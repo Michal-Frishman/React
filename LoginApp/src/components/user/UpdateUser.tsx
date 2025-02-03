@@ -1,8 +1,8 @@
 import { FormEvent, useContext, useRef, useState } from "react"
-import { closeUpdate } from "./LogedIn";
+import { CloseUpdate } from "./LogedIn";
 import { Button, Box, Modal, TextField } from '@mui/material';
 import axios, { AxiosError } from "axios"
-import { userContext } from "../../App";
+import { buttonStyle, UserContext } from "../../App";
 
 const style = {
     position: 'absolute',
@@ -10,7 +10,7 @@ const style = {
     left: '50%',
     transform: 'translate(-50%, -50%)',
     width: 400,
-    bgcolor: 'background.paper',
+    bgcolor: "white",
     border: '2px solid #000',
     boxShadow: 24,
     p: 4,
@@ -19,8 +19,8 @@ const style = {
 const UpdateUser = () => {
     const [open, setOpen] = useState(true);
 
-    const [close, setClose] = useContext(closeUpdate);
-    const [user, dispatch] = useContext(userContext);
+    const [close, setClose] = useContext(CloseUpdate);
+    const [user, dispatch] = useContext(UserContext);
 
     const url = 'http://localhost:3000/api/user'
 
@@ -78,7 +78,7 @@ const UpdateUser = () => {
                         <TextField label="address" inputRef={addressRef} defaultValue={user.address} />
                         <TextField label="phone" inputRef={phoneRef} defaultValue={user.phone} />
                         <TextField label="password" inputRef={passwordRef} defaultValue={user.password} />
-                        <Button type="submit">Save Change</Button>
+                        <Button type="submit" sx={{buttonStyle}}>Save</Button>
                     </form>
                 </Box>
             </Modal>

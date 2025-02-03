@@ -10,6 +10,15 @@ type action = {
   type: 'DELETE' | 'CREATE' | 'UPDATE',
   data: partUser
 }
+export const buttonStyle = {
+  color: "white",
+  backgroundColor: "rgb(215, 155, 154)",
+  margin: 2,
+  padding: "8px",
+  '&:hover': {
+    color: "white"
+  }
+}
 //check this!!!!!!!! ????אותו דבר עדכון/הוספה 
 const userReducer = (state: UserType, action: action): UserType => {
   switch (action.type) {
@@ -21,19 +30,18 @@ const userReducer = (state: UserType, action: action): UserType => {
       return state
   }
 }
-export const userContext = createContext<[UserType, Dispatch<action>]>([{} as UserType, () => { }]);
+export const UserContext = createContext<[UserType, Dispatch<action>]>([{} as UserType, () => { }]);
 
 function App() {
   const [user, dispatch] = useReducer(userReducer, {} as UserType);
   return (
     <>
-        <userContext.Provider value={[user, dispatch]}>
-          <Provider store={store}>
-            <RouterProvider router={router} />
-          </Provider>
-        </userContext.Provider>
+      <UserContext.Provider value={[user, dispatch]}>
+        <Provider store={store}>
+          <RouterProvider router={router} />
+        </Provider>
+      </UserContext.Provider>
     </>
   )
 }
-
 export default App

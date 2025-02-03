@@ -32,7 +32,8 @@ const AppLayout = () => {
                 <Login />
             </Toolbar>
             <NavBar />
-            <Outlet /></>
+            <Outlet />
+        </>
     );
 };
-export default AppLayout;
+export default AppLayout

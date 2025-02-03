@@ -7,7 +7,7 @@ import { fetchAddRecipe, fetchRecipes, RecipeType } from "./RecipesSlice"
 import { Box, Button, Modal, TextField } from "@mui/material"
 import { style } from "../user/Login"
 import { useContext, useState } from "react"
-import { userContext } from "../../App"
+import { buttonStyle, UserContext } from "../../App"
 import { useNavigate } from "react-router"
 import Error from '../Error'
 const schema = object({
@@ -19,7 +19,7 @@ const schema = object({
 const AddRecipe = () => {
     const navigate = useNavigate();
     const [openModal, setOpenModal] = useState(true);
-    const [user, dispatch] = useContext(userContext);
+    const [user, dispatch] = useContext(UserContext);
     const {
         formState: { errors },
         register,
@@ -44,7 +44,7 @@ const AddRecipe = () => {
     }
     return (
         user.id && (
-            <Modal open={openModal} onClose={() => setOpenModal(false)}>
+            <Modal open={openModal}>
             <Box sx={style}>
                 <h3>Add your recipe</h3>
                 <form onSubmit={handleSubmit(onSubmit)}>
@@ -56,7 +56,7 @@ const AddRecipe = () => {
                     <br />
                     {errors.description && <Error message={errors.description.message as string} />}
                     <br />
-                    <TextField label="Ingredients" {...register("ingredients")} />
+                    <TextField label="Ingredients(seperate by , )" {...register("ingredients")} />
                     <br />
                     {errors.ingredients && <Error message={errors.ingredients.message as string} />}
                     <br />
@@ -64,7 +64,7 @@ const AddRecipe = () => {
                     <br />
                     {errors.instructions && <Error message={errors.instructions.message as string} />}
                     <br />
-                    <Button type="submit" color="primary" variant="contained">Add</Button>
+                    <Button type="submit" sx={buttonStyle} >Add</Button>
                 </form>
             </Box>
         </Modal>

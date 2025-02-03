@@ -1,34 +1,33 @@
 import { Button } from "@mui/material";
 import { Link } from "react-router";
-
+import { buttonStyle } from "../App";
+const style = {
+    color: "rgb(215, 155, 154)",
+    // backgroundColor: "white",
+    margin: 2,
+    padding: "8px",
+    '&:hover': {
+      color: "white"
+    }
+  }
 const NavBar = () => {
-    const color = 'rgb(143, 157, 168)'
-
-    return (
+     return (
         <>
             <nav style={{
                 position: "fixed",
-                top: "10px", /* התאמה לגובה של Toolbar */
+                top: "10px", 
                 right: "10px",
-                display: "flex",
-                borderRadius: "5px"
-        
             }}>
-                <Button component={Link} to='/recipes' variant="contained" sx={{ color: "white", backgroundColor: color, marginRight: 1, padding: "8px"        , '&:hover': {
-            color: "white" // צבע במצב ריחוף
-        }}}  >
-                   Show all recipes
-                </Button>
-                <Button component={Link} to='/home' variant="contained" sx={{ color: "white", backgroundColor: color, marginRight: 1, padding: "8px"        , '&:hover': {
-            color: "white" // צבע במצב ריחוף
-        }}} >
-                    Home
-                </Button>
-                <Button component={Link} to='/about' variant="contained" sx={{ color: "white", backgroundColor: color, padding: "8px" ,        '&:hover': {
-            color: "white" // צבע במצב ריחוף
-        }}} >
-                    About
-                </Button>
+                <Link to='/recipes' style={style}  >
+                    Recipes
+                </Link>
+                <Link to='/home' style={style}  >
+                Home
+                </Link>   <Link to='/about'  style={style}  >
+                About
+                </Link>
+              
+            
             </nav>
         </>
     );

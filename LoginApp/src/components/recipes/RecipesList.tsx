@@ -3,11 +3,11 @@ import { fetchRecipes, RecipeType } from "./RecipesSlice"
 import { AppDispatch, RootStore } from "./RecipesStore";
 import { useContext, useEffect } from "react";
 import { Link, Outlet } from "react-router";
-import { userContext } from "../../App";
+import { UserContext } from "../../App";
 import { Box, Grid, ListItem, Typography } from "@mui/material";
 
 export default () => {
-    const [user, dispatchUser] = useContext(userContext);
+    const [user, dispatchUser] = useContext(UserContext);
     const dispatch = useDispatch<AppDispatch>();
     const recipesList = useSelector((state: RootStore) => state.recipes.recipes)
     useEffect(() => {
@@ -30,8 +30,8 @@ export default () => {
                         borderLeft: '1px solid #ddd',
                         paddingTop: 0
                     }}>
-                    <Box sx={{ backgroundColor: "rgb(143, 157, 168)", p: 2, borderRadius: 1, position: "sticky", top: 0, zIndex: 222 }}>
-                        <Typography variant="h4" color="white">
+                    <Box sx={{ backgroundColor: "rgb(215, 155, 154)", p: 2, borderRadius: 1, position: "sticky", top: 0, zIndex: 222 }}>
+                        <Typography variant="h5" color="white">
                             Recipes                    </Typography>
                     </Box>
                     {recipesList.map((r: RecipeType, index: number) => (
@@ -44,8 +44,8 @@ export default () => {
                             }}>📃 {r.title}</Link>
                         </ListItem>
                     ))}
-                    {user.id && <Box sx={{ position: "sticky", bottom: 10, backgroundColor: "rgb(143, 157, 168)", padding: "10px", textAlign: "center" }}>
-                        <Link to="/addRecipe" style={{ color: "black" }} > Add a recipe</Link>
+                    {user.id && <Box sx={{ position: "sticky", bottom: 10, backgroundColor: "rgb(215, 155, 154)", padding: "10px", textAlign: "center"}}>
+                        <Link to="/addRecipe" style={{ color: "white" }} > Add a recipe</Link>
                     </Box>}
                 </Grid>
                 <Grid

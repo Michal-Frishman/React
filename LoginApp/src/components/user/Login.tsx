@@ -2,7 +2,7 @@ import { FormEvent, useContext, useRef, useState } from "react"
 import { Button, Box, TextField, Modal } from '@mui/material';
 import LoggedIn from "./LogedIn";
 import axios from "axios"
-import { userContext } from "../../App";
+import { buttonStyle, UserContext } from "../../App";
 export const style = {
     position: 'absolute',
     top: '50%',
@@ -23,7 +23,7 @@ const HomePage = () => {
     const [login, setLogin] = useState(false);
     const passwordRef = useRef<HTMLInputElement>(null);
     const emailRef = useRef<HTMLInputElement>(null)
-    const [user, dispatch] = useContext(userContext);
+    const [user, dispatch] = useContext(UserContext);
     const submit = async (e: FormEvent) => {
         e.preventDefault();
         try {
@@ -62,7 +62,7 @@ const HomePage = () => {
             passwordRef.current!.value = ''
         }
     }
-    const color='rgb(143, 157, 168)'
+    const color="rgb(215, 155, 154)"
     return (
         <>
             {!login ?
@@ -76,7 +76,7 @@ const HomePage = () => {
                     <form onSubmit={submit}>
                         <TextField label='email' inputRef={emailRef} type="email" />
                         <TextField label='passoard' inputRef={passwordRef} type="password" />
-                        <Button type="submit" color="primary" variant="contained" >Save</Button>
+                        <Button type="submit" sx={buttonStyle}>Save</Button>
                     </form>
                 </Box>
             </Modal>
