@@ -1,33 +1,31 @@
-import { Button } from "@mui/material";
 import { Link } from "react-router";
-import { buttonStyle } from "../App";
 const style = {
-    color: "rgb(215, 155, 154)",
-    // backgroundColor: "white",
+    color: "white",
+    backgroundColor: "rgb(215, 155, 154)",
     margin: 2,
     padding: "8px",
+    borderRadius: 5,
     '&:hover': {
-      color: "white"
+        color: "white"
     }
-  }
+}
 const NavBar = () => {
-     return (
+    return (
         <>
             <nav style={{
                 position: "fixed",
-                top: "10px", 
+                top: "30px",
                 right: "10px",
+
             }}>
                 <Link to='/recipes' style={style}  >
                     Recipes
                 </Link>
                 <Link to='/home' style={style}  >
-                Home
-                </Link>   <Link to='/about'  style={style}  >
-                About
+                    Home
+                </Link>   <Link to='/about' style={style}  >
+                    About
                 </Link>
-              
-            
             </nav>
         </>
     );

@@ -1,9 +1,8 @@
 import { FormEvent, useContext, useRef, useState } from "react"
-import { CloseUpdate } from "./LogedIn";
+import { CloseUpdate } from "./LoggedIn";
 import { Button, Box, Modal, TextField } from '@mui/material';
-import axios, { AxiosError } from "axios"
+import axios from "axios"
 import { buttonStyle, UserContext } from "../../App";
-
 const style = {
     position: 'absolute',
     top: '50%',
@@ -15,22 +14,17 @@ const style = {
     boxShadow: 24,
     p: 4,
 };
-
 const UpdateUser = () => {
     const [open, setOpen] = useState(true);
-
     const [close, setClose] = useContext(CloseUpdate);
     const [user, dispatch] = useContext(UserContext);
-
     const url = 'http://localhost:3000/api/user'
-
     const firstNameRef = useRef<HTMLInputElement>(null);
     const lastNameRef = useRef<HTMLInputElement>(null);
     const emailRef = useRef<HTMLInputElement>(null);
     const addressRef = useRef<HTMLInputElement>(null);
     const phoneRef = useRef<HTMLInputElement>(null);
     const passwordRef = useRef<HTMLInputElement>(null);
-
     const submit = async (e: FormEvent) => {
         e.preventDefault();
         console.log(user.id);      

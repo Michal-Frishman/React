@@ -8,7 +8,6 @@ export type RecipeType = {
     description: string,
     ingredients: string[],
     instructions: string,
-    // products: string,
     authorId?: number
 }
 export const fetchRecipes = createAsyncThunk('recipes/fetch', async (_, thunkApi) => {
@@ -19,9 +18,9 @@ export const fetchRecipes = createAsyncThunk('recipes/fetch', async (_, thunkApi
         return thunkApi.rejectWithValue(erorr);
     }
 })
-export const fetchAddRecipe = createAsyncThunk('recipes/add', async ({recipe,userId}: { recipe: RecipeType; userId: number }, thunkApi) => {
+export const fetchAddRecipe = createAsyncThunk('recipes/add', async ({ recipe, userId }: { recipe: RecipeType; userId: number }, thunkApi) => {
     try {
-        const res = await axios.post("http://localhost:3000/api/recipes", recipe, { headers: { 'user-id': userId  } });
+        const res = await axios.post("http://localhost:3000/api/recipes", recipe, { headers: { 'user-id': userId } });
         return res.data as RecipeType;
     } catch (error) {
         return thunkApi.rejectWithValue(error);

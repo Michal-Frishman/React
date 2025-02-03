@@ -1,6 +1,6 @@
 import { FormEvent, useContext, useRef, useState } from "react"
 import { Button, Box, TextField, Modal } from '@mui/material';
-import LoggedIn from "./LogedIn";
+import LoggedIn from "./LoggedIn";
 import axios from "axios"
 import { buttonStyle, UserContext } from "../../App";
 export const style = {
@@ -27,7 +27,6 @@ const HomePage = () => {
     const submit = async (e: FormEvent) => {
         e.preventDefault();
         try {
-            
             const res = await axios.post(
                 finalUrl,
                 {
@@ -36,19 +35,18 @@ const HomePage = () => {
                 })
             const login = finalUrl.indexOf('login') !== -1 ? true : false
             const id = login ? res.data.user.id : res.data.userId;
-            const firstName = login? res.data.user.firstName : ''  
+            const firstName = login ? res.data.user.firstName : ''
             const password = passwordRef.current?.value || "";
             const email = emailRef.current?.value || ""
-            const lastName= login ? res.data.user.lastName : ''
-            const address= login ? res.data.user.address : ''
-            const phone= login ? res.data.user.phone : ''         
+            const lastName = login ? res.data.user.lastName : ''
+            const address = login ? res.data.user.address : ''
+            const phone = login ? res.data.user.phone : ''
             setLogin(true);
             dispatch({
                 type: 'CREATE',
-                data: { id, firstName, lastName, password, email, address, phone}
+                data: { id, firstName, lastName, password, email, address, phone }
             });
             setShowModal(false);
-            //any!!!!!!!!
         } catch (e: any) {
             console.log("the error" + e);
             if (e.response?.status === 400)
@@ -62,13 +60,13 @@ const HomePage = () => {
             passwordRef.current!.value = ''
         }
     }
-    const color="rgb(215, 155, 154)"
+    const color = "rgb(215, 155, 154)"
     return (
         <>
             {!login ?
                 <div>
-                    <Button sx={{backgroundColor:color,marginRight:1,padding:"8px"}} variant="contained" onClick={() => { setShowModal(true); setFinalUrl(url + '/login') }}>Sign in</Button>
-                    <Button sx={{backgroundColor:color,marginRight:1,padding:"8px"}}  variant="contained" onClick={() => { setShowModal(true); setFinalUrl(url + '/register') }}>Sign up</Button>
+                    <Button sx={{ backgroundColor: color, marginRight: 1, padding: "8px" }} variant="contained" onClick={() => { setShowModal(true); setFinalUrl(url + '/login') }}>Sign in</Button>
+                    <Button sx={{ backgroundColor: color, marginRight: 1, padding: "8px" }} variant="contained" onClick={() => { setShowModal(true); setFinalUrl(url + '/register') }}>Sign up</Button>
                 </div> :
                 <LoggedIn />}
             <Modal open={showModal} onClose={() => setShowModal(false)}>

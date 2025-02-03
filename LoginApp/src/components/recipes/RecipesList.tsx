@@ -5,7 +5,6 @@ import { useContext, useEffect } from "react";
 import { Link, Outlet } from "react-router";
 import { UserContext } from "../../App";
 import { Box, Grid, ListItem, Typography } from "@mui/material";
-
 export default () => {
     const [user, dispatchUser] = useContext(UserContext);
     const dispatch = useDispatch<AppDispatch>();

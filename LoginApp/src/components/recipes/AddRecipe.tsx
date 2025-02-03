@@ -27,7 +27,6 @@ const AddRecipe = () => {
         reset
     } = useForm({ resolver: yupResolver(schema) })
     const dispatchFetch = useDispatch<AppDispatch>();
-    //any!!!
     const onSubmit = async (data: any) => {
         const ingredientsArray = data.ingredients.split(',');
         const recipe: RecipeType = {
@@ -45,32 +44,31 @@ const AddRecipe = () => {
     return (
         user.id && (
             <Modal open={openModal}>
-            <Box sx={style}>
-                <h3>Add your recipe</h3>
-                <form onSubmit={handleSubmit(onSubmit)}>
-                    <TextField label="Title" {...register("title")} />
-                    <br />
-                    {errors.title && <Error message={errors.title.message as string} />}
-                    <br />
-                    <TextField label="Description" {...register("description")} />
-                    <br />
-                    {errors.description && <Error message={errors.description.message as string} />}
-                    <br />
-                    <TextField label="Ingredients(seperate by , )" {...register("ingredients")} />
-                    <br />
-                    {errors.ingredients && <Error message={errors.ingredients.message as string} />}
-                    <br />
-                    <TextField label="Instructions" {...register("instructions")} />
-                    <br />
-                    {errors.instructions && <Error message={errors.instructions.message as string} />}
-                    <br />
-                    <Button type="submit" sx={buttonStyle} >Add</Button>
-                </form>
-            </Box>
-        </Modal>
-        
+                <Box sx={style}>
+                    <h3>Add your recipe</h3>
+                    <form onSubmit={handleSubmit(onSubmit)}>
+                        <TextField label="Title" {...register("title")} />
+                        <br />
+                        {errors.title && <Error message={errors.title.message as string} />}
+                        <br />
+                        <TextField label="Description" {...register("description")} />
+                        <br />
+                        {errors.description && <Error message={errors.description.message as string} />}
+                        <br />
+                        <TextField label="Ingredients(seperate by , )" {...register("ingredients")} />
+                        <br />
+                        {errors.ingredients && <Error message={errors.ingredients.message as string} />}
+                        <br />
+                        <TextField label="Instructions" {...register("instructions")} />
+                        <br />
+                        {errors.instructions && <Error message={errors.instructions.message as string} />}
+                        <br />
+                        <Button type="submit" sx={buttonStyle} >Add</Button>
+                    </form>
+                </Box>
+            </Modal>
         )
     );
-    
+
 }
 export default AddRecipe

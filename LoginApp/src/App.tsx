@@ -19,7 +19,6 @@ export const buttonStyle = {
     color: "white"
   }
 }
-//check this!!!!!!!! ????אותו דבר עדכון/הוספה 
 const userReducer = (state: UserType, action: action): UserType => {
   switch (action.type) {
     case 'CREATE':
@@ -31,7 +30,6 @@ const userReducer = (state: UserType, action: action): UserType => {
   }
 }
 export const UserContext = createContext<[UserType, Dispatch<action>]>([{} as UserType, () => { }]);
-
 function App() {
   const [user, dispatch] = useReducer(userReducer, {} as UserType);
   return (
