@@ -4,8 +4,7 @@ import { router } from './components/router'
 import { Provider } from 'react-redux'
 import store from './components/recipes/RecipesStore'
 import { createContext, Dispatch, useReducer } from 'react'
-import { UserType } from './components/UserType'
-import { ThemeProvider } from '@mui/material'
+import { UserType } from './Types/UserType'
 type partUser = Partial<UserType>;
 type action = {
   type: 'DELETE' | 'CREATE' | 'UPDATE',

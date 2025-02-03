@@ -24,11 +24,10 @@ const AppLayout = () => {
         <>
             <Toolbar sx={{
                 position: "fixed",
-                top: "25px",
-                left: "10px",
+                top: "2px",
+                left: 0,
                 display: "flex",
-                borderRadius: "5px",
-                justifyContent: "flex-start", gap: "115px",
+                borderRadius: "5px"
             }}>
                 <Login />
             </Toolbar>

@@ -1,15 +1,13 @@
 import { useDispatch, useSelector } from "react-redux"
 import { fetchRecipes, RecipeType } from "./RecipesSlice"
 import { AppDispatch, RootStore } from "./RecipesStore";
-import { useContext, useEffect, useState } from "react";
-import AddRecipe from "./AddRecipe";
+import { useContext, useEffect } from "react";
 import { Link, Outlet } from "react-router";
 import { userContext } from "../../App";
-import { Box, Grid, List, ListItem, Typography } from "@mui/material";
+import { Box, Grid, ListItem, Typography } from "@mui/material";
 
 export default () => {
     const [user, dispatchUser] = useContext(userContext);
-    const [addRecipes, setAddRecipes] = useState(false);
     const dispatch = useDispatch<AppDispatch>();
     const recipesList = useSelector((state: RootStore) => state.recipes.recipes)
     useEffect(() => {
@@ -31,12 +29,10 @@ export default () => {
                         zIndex: 1,
                         borderLeft: '1px solid #ddd',
                         paddingTop: 0
-                    }}
-
-                >
-                    <Box sx={{ backgroundColor: "rgb(143, 157, 168)", p: 2, borderRadius: 1,position:"sticky",top:0,zIndex:222 }}>
+                    }}>
+                    <Box sx={{ backgroundColor: "rgb(143, 157, 168)", p: 2, borderRadius: 1, position: "sticky", top: 0, zIndex: 222 }}>
                         <Typography variant="h4" color="white">
-                    Recipes                    </Typography>
+                            Recipes                    </Typography>
                     </Box>
                     {recipesList.map((r: RecipeType, index: number) => (
                         <ListItem key={r.id ?? index} sx={{ marginBottom: "15px" }}>

@@ -3,6 +3,8 @@ import { useParams } from "react-router";
 import { RootStore } from "./RecipesStore";
 import { RecipeType } from "./RecipesSlice";
 import { Box, Card, List, ListItem, Typography } from "@mui/material";
+import { useContext } from "react";
+import { userContext } from "../../App";
 
 const ShowRecipe = () => {
     const { id } = useParams();
@@ -13,43 +15,49 @@ const ShowRecipe = () => {
     }
 
     return (
-        <Box sx={{ display: "flex", justifyContent: "center", minHeight: "100vh", mt: 8.5, mr: 2 }}>
-            <Card sx={{ width: 800, borderRadius: 2, overflow: 'auto' }}>
-                <Box sx={{ backgroundColor: "rgb(143, 157, 168)", p: 2 }}>
-                    <Typography variant="h4" color="white">
-                        {recipe?.title}
+    <>
+            <Box sx={{ display: "flex", justifyContent: "center", minHeight: "100vh", mt: 8.5, mr: 2 }}>
+                <Card sx={{ width: 800, borderRadius: 2, overflow: 'auto' }}>
+                    <Box sx={{ backgroundColor: "rgb(143, 157, 168)", p: 2 }}>
+                        <Typography variant="h4" color="white">
+                            {recipe?.title}
+                        </Typography>
+                    </Box>
+                    <Box sx={{ backgroundColor: "rgb(143, 157, 168)", p: 1, borderRadius: 1, mt: 2 }}>
+                        <Typography variant="h6" color="white">
+                            Description:
+                        </Typography>
+                    </Box>
+                    <Typography sx={{ mt: 1 }}>
+                        {recipe?.description}
                     </Typography>
-                </Box>
-                <Box sx={{ backgroundColor: "rgb(143, 157, 168)", p: 1, borderRadius: 1, mt: 2 }}>
-                    <Typography variant="h6" color="white">
-                        Description:
+                    <Box sx={{ backgroundColor: "rgb(143, 157, 168)", p: 1, borderRadius: 1, mt: 2 }}>
+                        <Typography variant="h6" color="white">
+                            Ingredients:
+                        </Typography>
+                    </Box>
+                    <List>
+                        {recipe?.ingredients?.map((ingredient, index) => (
+                            <ListItem key={index} sx={{ display: "flex", alignItems: "center", gap: 1 }}>
+                                <Typography>🥣 {ingredient}</Typography>
+                            </ListItem>
+                        ))}
+                    </List>
+                    <Box sx={{ backgroundColor: "rgb(143, 157, 168)", p: 1, borderRadius: 1, mt: 2 }}>
+                        <Typography variant="h6" color="white">
+                            Instructions:
+                        </Typography>
+                    </Box>
+                    <Typography sx={{ mt: 1 }}>
+                        {recipe?.instructions}
                     </Typography>
-                </Box>
-                <Typography sx={{ mt: 1 }}>
-                    {recipe?.description}
-                </Typography>
-                <Box sx={{ backgroundColor: "rgb(143, 157, 168)", p: 1, borderRadius: 1, mt: 2 }}>
-                    <Typography variant="h6" color="white">
-                        Ingredients:
-                    </Typography>
-                </Box>
-                <List>
-                    {recipe?.ingredients.map((ingredient, index) => (
-                        <ListItem key={index} sx={{ display: "flex", alignItems: "center", gap: 1 }}>
-                            <Typography>🥣 {ingredient}</Typography>
-                        </ListItem>
-                    ))}
-                </List>
-                <Box sx={{ backgroundColor: "rgb(143, 157, 168)", p: 1, borderRadius: 1, mt: 2 }}>
-                    <Typography variant="h6" color="white">
-                        Instructions:
-                    </Typography>
-                </Box>
-                <Typography sx={{ mt: 1 }}>
-                    {recipe?.instructions}
-                </Typography>
-            </Card>
-        </Box>
-    );
+                </Card>
+            </Box>
+    
+    </>
+            )
+        
+        
+    
 }
 export default ShowRecipe;

@@ -4,11 +4,12 @@ import { object, string } from "yup"
 import { useDispatch } from "react-redux"
 import { AppDispatch } from "./RecipesStore"
 import { fetchAddRecipe, fetchRecipes, RecipeType } from "./RecipesSlice"
-import { Box, Modal, TextField } from "@mui/material"
+import { Box, Button, Modal, TextField } from "@mui/material"
 import { style } from "../user/Login"
 import { useContext, useState } from "react"
 import { userContext } from "../../App"
 import { useNavigate } from "react-router"
+import Error from '../Error'
 const schema = object({
     title: string().required(),
     description: string().required(),
@@ -41,33 +42,35 @@ const AddRecipe = () => {
         reset();
         navigate('/recipes');
     }
-    return (<>
-        <Modal open={openModal}>
+    return (
+        user.id && (
+            <Modal open={openModal} onClose={() => setOpenModal(false)}>
             <Box sx={style}>
                 <h3>Add your recipe</h3>
                 <form onSubmit={handleSubmit(onSubmit)}>
-                    <TextField label="title" {...register("title")} />
+                    <TextField label="Title" {...register("title")} />
                     <br />
-                    {errors.title && <div color="red">{errors.title.message}</div>}
+                    {errors.title && <Error message={errors.title.message as string} />}
                     <br />
-                    <TextField label="description" {...register("description")} />
+                    <TextField label="Description" {...register("description")} />
                     <br />
-                    {errors.description && <div color="red">{errors.description.message}</div>}
+                    {errors.description && <Error message={errors.description.message as string} />}
                     <br />
-                    <TextField label="ingredients" {...register("ingredients")} />
+                    <TextField label="Ingredients" {...register("ingredients")} />
                     <br />
-                    {errors.ingredients && <div color="red">{errors.ingredients.message}</div>}
+                    {errors.ingredients && <Error message={errors.ingredients.message as string} />}
                     <br />
-                    <TextField label="instructions" {...register("instructions")} />
+                    <TextField label="Instructions" {...register("instructions")} />
                     <br />
-                    {errors.instructions && <div color="red">{errors.instructions.message}</div>}
+                    {errors.instructions && <Error message={errors.instructions.message as string} />}
                     <br />
-                    <button type="submit" >Add</button>
+                    <Button type="submit" color="primary" variant="contained">Add</Button>
                 </form>
             </Box>
         </Modal>
-
-
-    </>)
+        
+        )
+    );
+    
 }
 export default AddRecipe
