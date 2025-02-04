@@ -43,7 +43,7 @@ export default () => {
                             }}>📃 {r.title}</Link>
                         </ListItem>
                     ))}
-                    {user.id && <Box sx={{ position: "sticky", bottom: 10, backgroundColor: "rgb(215, 155, 154)", padding: "10px", textAlign: "center"}}>
+                    {user.id && <Box sx={{ position: "sticky", bottom: 10, backgroundColor: "rgb(215, 155, 154)", padding: "10px", textAlign: "center" }}>
                         <Link to="/addRecipe" style={{ color: "white" }} > Add a recipe</Link>
                     </Box>}
                 </Grid>

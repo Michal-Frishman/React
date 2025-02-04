@@ -5,7 +5,6 @@ import ShowRecipe from './recipes/ShowRecipe'
 import HomePage from './HomePage';
 import AddRecipe from './recipes/AddRecipe';
 import About from './About';
-
 export const router = createBrowserRouter([
     {
         path: '/',
@@ -27,8 +26,9 @@ export const router = createBrowserRouter([
                 path: 'addRecipe',
                 element: <AddRecipe />
             },
-            {path:'about',
-                element: <About/>
+            {
+                path: 'about',
+                element: <About />
             }
         ]
     }

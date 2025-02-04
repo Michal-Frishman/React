@@ -1,7 +1,7 @@
 import { FormEvent, useContext, useRef, useState } from "react"
 import { Button, Box, TextField, Modal } from '@mui/material';
 import LoggedIn from "./LoggedIn";
-import axios from "axios"
+import axios, { AxiosError } from "axios"
 import { buttonStyle, UserContext } from "../../App";
 export const style = {
     position: 'absolute',
@@ -47,7 +47,7 @@ const HomePage = () => {
                 data: { id, firstName, lastName, password, email, address, phone }
             });
             setShowModal(false);
-        } catch (e: any) {
+        } catch (e: AxiosError | any) {
             console.log("the error" + e);
             if (e.response?.status === 400)
                 alert('user is already login')

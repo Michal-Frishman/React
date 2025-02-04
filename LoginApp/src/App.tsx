@@ -13,8 +13,7 @@ type action = {
 export const buttonStyle = {
   color: "white",
   backgroundColor: "rgb(215, 155, 154)",
-  margin: 2,
-  padding: "8px",
+  margin: 0.5,
   '&:hover': {
     color: "white"
   }
@@ -34,11 +33,11 @@ function App() {
   const [user, dispatch] = useReducer(userReducer, {} as UserType);
   return (
     <>
-      <UserContext.Provider value={[user, dispatch]}>
+      <UserContext value={[user, dispatch]}>
         <Provider store={store}>
           <RouterProvider router={router} />
         </Provider>
-      </UserContext.Provider>
+      </UserContext>
     </>
   )
 }

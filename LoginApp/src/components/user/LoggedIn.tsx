@@ -4,7 +4,7 @@ import UpdateUser from "./UpdateUser";
 import { buttonStyle, UserContext } from "../../App";
 export const CloseUpdate = createContext<[boolean, Dispatch<boolean>]>([false, () => { }])
 const LoggedIn = () => {
-    const stringAvatar = (name: string) => {
+    const stringToAvatar = (name: string) => {
         if (name == "" || name == undefined) {
             return {
                 sx: {
@@ -27,21 +27,19 @@ const LoggedIn = () => {
     return (
         <>
             <>
-                <Avatar {...stringAvatar(user.firstName)} >
+                <Avatar {...stringToAvatar(user.firstName)} >
                     {(user.firstName ? user.firstName[0] : '')}
                 </Avatar>
-                <h4 style={{margin: "20px",color:"rgb(215, 155, 154)"}}> Hello {user.firstName}</h4>
+                <h4 style={{ margin: "20px", color: "rgb(215, 155, 154)" }}> Hello {user.firstName}</h4>
                 <Button sx={buttonStyle} onClick={() => setUpdate(!update)}>
                     Update
                 </Button>
                 <Button sx={buttonStyle} onClick={() => { window.location.href = "/" }}>
                     sign out
                 </Button>
-                <CloseUpdate.Provider value={[update, setUpdate]}>
                     {update &&
-                        <UpdateUser />
+                        <UpdateUser setClose={setUpdate}/>
                     }
-                </CloseUpdate.Provider>
             </>
         </>
     )

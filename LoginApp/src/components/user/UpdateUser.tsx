@@ -1,7 +1,7 @@
-import { FormEvent, useContext, useRef, useState } from "react"
+import { Dispatch, FormEvent, useContext, useRef, useState } from "react"
 import { CloseUpdate } from "./LoggedIn";
 import { Button, Box, Modal, TextField } from '@mui/material';
-import axios from "axios"
+import axios, { AxiosError } from "axios"
 import { buttonStyle, UserContext } from "../../App";
 const style = {
     position: 'absolute',
@@ -14,9 +14,8 @@ const style = {
     boxShadow: 24,
     p: 4,
 };
-const UpdateUser = () => {
+const UpdateUser = ({ setClose }: { setClose: Dispatch<boolean> }) => {
     const [open, setOpen] = useState(true);
-    const [close, setClose] = useContext(CloseUpdate);
     const [user, dispatch] = useContext(UserContext);
     const url = 'http://localhost:3000/api/user'
     const firstNameRef = useRef<HTMLInputElement>(null);
@@ -24,13 +23,12 @@ const UpdateUser = () => {
     const emailRef = useRef<HTMLInputElement>(null);
     const addressRef = useRef<HTMLInputElement>(null);
     const phoneRef = useRef<HTMLInputElement>(null);
-    const passwordRef = useRef<HTMLInputElement>(null);
-    const submit = async (e: FormEvent) => {
+    const passwordRef = useRef<HTMLInputElement>(null); const submit = async (e: FormEvent) => {
         e.preventDefault();
-        console.log(user.id);      
-        console.log("user details "+firstNameRef.current?.value, lastNameRef.current?.value, emailRef.current?.value, phoneRef.current?.value, passwordRef.current?.value);
+        console.log(user.id);
+        console.log("user details " + firstNameRef.current?.value, lastNameRef.current?.value, emailRef.current?.value, phoneRef.current?.value, passwordRef.current?.value);
         try {
-         await axios.put(
+            await axios.put(
                 url,
                 {
                     firstName: firstNameRef.current?.value,
@@ -38,9 +36,9 @@ const UpdateUser = () => {
                     email: emailRef.current?.value,
                     address: addressRef.current?.value,
                     phone: phoneRef.current?.value,
-                    password : passwordRef.current?.value
+                    password: passwordRef.current?.value
                 },
-                { headers: { 'user-id': user.id+ '' } }
+                { headers: { 'user-id': user.id + '' } }
             )
             dispatch({
                 type: 'UPDATE',
@@ -55,7 +53,7 @@ const UpdateUser = () => {
             });
             setOpen(!open);
             setClose(!close);
-        } catch (e: any) {
+        } catch (e: AxiosError | any) {
             console.log(e);
             if (e.status === 404)
                 alert('user does not exsist');
@@ -72,7 +70,7 @@ const UpdateUser = () => {
                         <TextField label="address" inputRef={addressRef} defaultValue={user.address} />
                         <TextField label="phone" inputRef={phoneRef} defaultValue={user.phone} />
                         <TextField label="password" inputRef={passwordRef} defaultValue={user.password} />
-                        <Button type="submit" sx={{buttonStyle}}>Save</Button>
+                        <Button type="submit" sx={{ buttonStyle }}>Save</Button>
                     </form>
                 </Box>
             </Modal>

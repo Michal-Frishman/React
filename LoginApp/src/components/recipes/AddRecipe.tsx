@@ -10,6 +10,7 @@ import { useContext, useState } from "react"
 import { buttonStyle, UserContext } from "../../App"
 import { useNavigate } from "react-router"
 import Error from '../Error'
+import { AddRecipeType } from "../../Types/AddRecipeType"
 const schema = object({
     title: string().required(),
     description: string().required(),
@@ -27,7 +28,7 @@ const AddRecipe = () => {
         reset
     } = useForm({ resolver: yupResolver(schema) })
     const dispatchFetch = useDispatch<AppDispatch>();
-    const onSubmit = async (data: any) => {
+    const onSubmit = async (data: AddRecipeType) => {
         const ingredientsArray = data.ingredients.split(',');
         const recipe: RecipeType = {
             title: data.title,
@@ -37,7 +38,6 @@ const AddRecipe = () => {
         };
         setOpenModal(false);
         dispatchFetch(fetchAddRecipe({ recipe, userId: user.id }));
-        dispatchFetch(fetchRecipes());
         reset();
         navigate('/recipes');
     }
